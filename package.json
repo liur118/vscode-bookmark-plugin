@@ -1,13 +1,14 @@
 {
   "name": "vscode-bookmark-plugin",
-  "displayName": "VS Code 书签插件",
-  "description": "一个功能强大的书签管理插件，支持可视化链路和导入导出功能",
+  "displayName": "Bookmark for VS Code",
+  "description": "支持添加书签、分组管理。",
   "version": "1.0.0",
   "publisher": "liur",
   "author": {
     "name": "liur",
     "email": "liur911108@163.com"
   },
+  "icon": "logo.png",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -256,7 +257,7 @@
       }
       }
     },
-    "icon": "media/icon.png"
+    "icon": "media/logo.png"
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
