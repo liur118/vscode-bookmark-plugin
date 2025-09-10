@@ -1,0 +1,9 @@
+*.vsix
+dist
+node_modules
+coverage
+.vscode
+yarn.lock
+.env
+.env.local
+.env.*.local

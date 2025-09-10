@@ -1,0 +1,106 @@
+#visualization {
+    width: 100%;
+    height: calc(100vh - 60px);
+    border: 1px solid #ccc;
+    background-color: var(--vscode-editor-background);
+}
+
+#toolbar {
+    height: 50px;
+    padding: 10px;
+    background-color: var(--vscode-editorWidget-background);
+    border-bottom: 1px solid var(--vscode-editorWidget-border);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--vscode-button-hoverBackground);
+}
+
+button:active {
+    background-color: var(--vscode-button-activeBackground);
+}
+
+.node {
+    fill: var(--vscode-charts-blue);
+    stroke: var(--vscode-charts-foreground);
+    stroke-width: 2px;
+    cursor: pointer;
+}
+
+.node:hover {
+    fill: var(--vscode-charts-purple);
+}
+
+.node.bookmark {
+    fill: var(--vscode-charts-orange);
+}
+
+.node.selected {
+    stroke: var(--vscode-charts-red);
+    stroke-width: 3px;
+}
+
+.link {
+    stroke: var(--vscode-charts-foreground);
+    stroke-width: 2px;
+    marker-end: url(#arrowhead);
+}
+
+.link:hover {
+    stroke: var(--vscode-charts-blue);
+    stroke-width: 3px;
+}
+
+.link.selected {
+    stroke: var(--vscode-charts-red);
+    stroke-width: 3px;
+}
+
+.node-label {
+    font-family: var(--vscode-font-family);
+    font-size: 12px;
+    fill: var(--vscode-foreground);
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+.edge-label {
+    font-family: var(--vscode-font-family);
+    font-size: 10px;
+    fill: var(--vscode-foreground);
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+.context-menu {
+    position: absolute;
+    background-color: var(--vscode-menu-background);
+    border: 1px solid var(--vscode-menu-border);
+    border-radius: 3px;
+    padding: 5px 0;
+    z-index: 1000;
+    min-width: 120px;
+}
+
+.context-menu-item {
+    padding: 5px 15px;
+    cursor: pointer;
+    color: var(--vscode-menu-foreground);
+}
+
+.context-menu-item:hover {
+    background-color: var(--vscode-menu-selectionBackground);
+    color: var(--vscode-menu-selectionForeground);
+}

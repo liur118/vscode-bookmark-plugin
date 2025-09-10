@@ -1,0 +1,286 @@
+{
+  "name": "vscode-bookmark-plugin",
+  "displayName": "VS Code 书签插件",
+  "description": "一个功能强大的书签管理插件，支持可视化链路和导入导出功能",
+  "version": "1.0.0",
+  "publisher": "liur",
+  "author": {
+    "name": "liur",
+    "email": "liur911108@163.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liur118/vscode-bookmark-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liur118/vscode-bookmark-plugin/issues"
+  },
+  "homepage": "https://github.com/liur118/vscode-bookmark-plugin#readme",
+  "keywords": [
+    "bookmark",
+    "navigation",
+    "productivity",
+    "visualization",
+    "vscode-extension"
+  ],
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-bookmark-plugin.addBookmark",
+        "title": "添加书签",
+        "icon": "$(bookmark)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.removeBookmark",
+        "title": "删除书签",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.jumpToBookmark",
+        "title": "跳转到书签",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.refreshBookmarks",
+        "title": "刷新书签",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.openVisualization",
+        "title": "打开可视化",
+        "icon": "$(repo-forked)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.addGroup",
+        "title": "添加组",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.addSubGroup",
+        "title": "添加子组",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.renameGroup",
+        "title": "重命名分组",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.removeGroup",
+        "title": "删除分组",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.moveBookmarkToGroup",
+        "title": "移动到分组",
+        "icon": "$(move)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.setBookmarkPriority",
+        "title": "设置优先级",
+        "icon": "$(star)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.setGroupAsDefault",
+        "title": "设为默认分组",
+        "icon": "$(star-empty)"
+      }
+      ,
+      {
+        "command": "vscode-bookmark-plugin.renameBookmark",
+        "title": "重命名书签",
+        "icon": "$(edit)"
+      }
+      ,
+      {
+        "command": "vscode-bookmark-plugin.moveItemUp",
+        "title": "上移",
+        "icon": "$(arrow-up)"
+      },
+      {
+        "command": "vscode-bookmark-plugin.moveItemDown",
+        "title": "下移",
+        "icon": "$(arrow-down)"
+      }
+    ],  
+    "viewsContainers":{
+      "activitybar": [
+        {
+          "id": "bookmarkPlugin",
+          "title": "书签",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+
+    "views": {
+      "bookmarkPlugin": [
+        {
+          "id": "bookmarkExplorer",
+          "name": "书签",
+          "when": "workspaceFolderCount != 0"
+        }
+      ]
+    },
+
+    "menus": {
+
+      "view/title": [
+        {
+          "command": "vscode-bookmark-plugin.addBookmark",
+          "when": "view == bookmarkExplorer",
+          "group": "navigation@1"
+        },
+        {
+          "command": "vscode-bookmark-plugin.refreshBookmarks",
+          "when": "view == bookmarkExplorer",
+          "group": "navigation@2"
+        },
+        {
+          "command": "vscode-bookmark-plugin.addGroup",
+          "when": "view == bookmarkExplorer",
+          "group": "navigation@4"
+        }
+        ,
+        {
+          "command": "vscode-bookmark-plugin.moveItemUp",
+          "when": "view == bookmarkExplorer && bookmarkExplorerSingleSelection == true",
+          "group": "navigation@5"
+        },
+        {
+          "command": "vscode-bookmark-plugin.moveItemDown",
+          "when": "view == bookmarkExplorer && bookmarkExplorerSingleSelection == true",
+          "group": "navigation@6"
+        }
+      ],
+      "view/item/context": [
+        {
+          "description": "删除书签",
+          "command": "vscode-bookmark-plugin.removeBookmark",
+          "when": "view == bookmarkExplorer && viewItem == bookmark",
+          "group": "inline@2"
+        },
+          {
+            "description": "重命名书签",
+            "command": "vscode-bookmark-plugin.renameBookmark",
+            "when": "view == bookmarkExplorer && viewItem == bookmark",
+            "group": "inline@1"
+          },
+        {
+          "description": "设置书签优先级",
+          "command": "vscode-bookmark-plugin.setBookmarkPriority",
+          "when": "view == bookmarkExplorer && viewItem == bookmark",
+          "group": "bookmark@1"
+        },
+        {
+          "description": "移动书签到分组",
+          "command": "vscode-bookmark-plugin.moveBookmarkToGroup",
+          "when": "view == bookmarkExplorer && viewItem == bookmark",
+          "group": "bookmark@2"
+        },
+        {
+          "description": "设为默认分组",
+          "command": "vscode-bookmark-plugin.setGroupAsDefault",
+          "when": "view == bookmarkExplorer && viewItem == bookmarkGroup",
+          "group": "group@1"
+        },
+        {
+          "description": "重命名分组",
+          "command": "vscode-bookmark-plugin.renameGroup",
+          "when": "view == bookmarkExplorer && viewItem == bookmarkGroup",
+          "group": "group@1"
+        },
+        {
+          "description": "添加子组",
+          "command": "vscode-bookmark-plugin.addSubGroup",
+          "when": "view == bookmarkExplorer && viewItem == bookmarkGroup",
+          "group": "group@3"
+        },
+        {
+          "description": "删除分组",
+          "command": "vscode-bookmark-plugin.removeGroup",
+          "when": "view == bookmarkExplorer && viewItem == bookmarkGroup",
+          "group": "group@4"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "vscode-bookmark-plugin.addBookmark",
+          "group": "bookmarks@1"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "vscode-bookmark-plugin.addBookmark"
+        },
+        {
+          "command": "vscode-bookmark-plugin.refreshBookmarks"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "vscode-bookmark-plugin.addBookmark",
+        "key": "ctrl+shift+b",
+        "mac": "cmd+shift+b"
+      }
+    ],
+    "configuration": {
+      "title": "Bookmark for VS Code",
+      "properties": {
+      "bookmarkPlugin.storageType": {
+        "type": "string",
+        "enum": [
+        "file",
+        "sqlite",
+        "database"
+        ],
+        "default": "file",
+        "description": "存储类型：file 使用本地 JSON 文件；sqlite 使用 sqlite（未实现）；database 使用远程数据库（未实现）"
+      },
+      "bookmarkPlugin.storageLocation": {
+        "type": "string",
+        "default": "",
+        "description": "当 storageType 为 file 时，指定存储文件路径（可使用 ~ 开头），留空则使用默认：~/.vs_bookmark/${projectName}/storage.json"
+      }
+      }
+    },
+    "icon": "media/icon.png"
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.103.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@typescript-eslint/eslint-plugin": "^8.42.0",
+    "@typescript-eslint/parser": "^8.42.0",
+    "eslint": "^9.34.0",
+    "typescript": "^5.9.2",
+    "ts-loader": "^9.5.4",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
